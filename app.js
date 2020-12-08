@@ -1,5 +1,5 @@
 const express = require('express');
-const adminRoutes = require('./routes/admin');
+const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const rootDir = require('./util/path');
 const path = require('path')
@@ -8,9 +8,15 @@ const app = express();
 const bodyParser = require('body-parser');
 
 
+
 app.use(bodyParser.urlencoded({urlencoded: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/admin', adminRoutes);
+
+app.set('view engine', 'pug');
+app.set('views', './views');
+
+
+app.use('/admin', adminData.routes);
 
 app.use(shopRoutes);
 

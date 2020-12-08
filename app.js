@@ -7,13 +7,13 @@ const app = express();
 
 const bodyParser = require('body-parser');
 
-
+app.engine('pug', require('pug').__express)
 
 app.use(bodyParser.urlencoded({urlencoded: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'pug');
-app.set('views', './views');
+app.set('views', 'views');
 
 
 app.use('/admin', adminData.routes);
